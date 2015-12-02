@@ -4,7 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * ‰‰Zq‚Ì‚Ü‚Æ‚ßƒNƒ‰ƒX boolean
+ * æ¼”ç®—å­ã®ã¾ã¨ã‚ã‚¯ãƒ©ã‚¹ boolean
  * @author Raiti
  * @version 1.0.0
  *
@@ -12,15 +12,16 @@ import java.util.regex.Pattern;
 public class Boolean {
 	
 	/**
-	 * ƒpƒ^[ƒ“‰»‚µ‚½ƒeƒLƒXƒg‚ğÆ‡‚µ‚Ü‚·
-	 * @param txt Æ‡‚·‚é•¶š—ñ
-	 * @param target ƒpƒ^[ƒ“•¶š—ñ
-	 * @return ˆê’v‚·‚éê‡true ‚µ‚È‚¢ê‡false
+	 * ãƒ‘ã‚¿ãƒ¼ãƒ³åŒ–ã—ãŸãƒ†ã‚­ã‚¹ãƒˆã‚’ç…§åˆã—ã¾ã™
+	 * @param txt ç…§åˆã™ã‚‹æ–‡å­—åˆ—
+	 * @param target ãƒ‘ã‚¿ãƒ¼ãƒ³æ–‡å­—åˆ—
+	 * @return ä¸€è‡´ã™ã‚‹å ´åˆtrue ã—ãªã„å ´åˆfalse
 	 */
 	public static boolean characterEvaluation(String txt,String target) {
 		Pattern pattern = Pattern.compile(target);
 		Matcher M = pattern.matcher(txt);
 		return M.find();
 	}
+	
 	
 }

@@ -4,7 +4,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 /**
- * �f�o�b�O�p���\�b�h�ł�
+ * このアノテーションがついたメソッドはデバッグ用メソッドです
  * @author Raiti
  * @version 1.0.0
  *

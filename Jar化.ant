@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="Create ライブラリー for Project Raiti's API" default="create_run_jar">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <!--define folder properties-->
+    <property name="dir.buildfile" value="."/>
+    <property name="dir.workspace" value="C:/Program1/Java/Project"/>
+    <property name="dir.jarfile" value="C:\Program1\Java\ライブラリー"/>
+    <target name="create_run_jar">
+        <jar destfile="${dir.jarfile}/Raiti'sAPI Master.jar" filesetmanifest="mergewithoutmain" update="true">
+            <manifest>
+                <attribute name="Main-Class" value=""/>
+                <attribute name="Class-Path" value="."/>
+            </manifest>
+            <fileset dir="${dir.workspace}/Raiti'S API/bin"/>
+        	<fileset dir="${dir.workspace}/Raiti'S API/src"/>
+        	<fileset file=""/>
+            <zipfileset excludes="META-INF/*.SF" src="C:/Program1/Java/ライブラリー/juniversalchardet-1.0.3.jar"/>
+        </jar>
+    </target>
+</project>
