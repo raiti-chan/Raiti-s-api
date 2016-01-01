@@ -84,7 +84,8 @@ public class CsvWriter extends BufferedWriter {
 	 * <B>コンストラクター</B><br>
 	 * 文字コードはファイルから解析します。
 	 * @param file CSVファイル
-	 * @throws IOException 入出力エラーが発生した場合。
+	 * @throws FileNotFoundException ファイルが存在しないか、通常ファイルではなくディレクトリであるか、
+	 * またはなんらかの理由で開くことができない場合。
 	 * @throws UnsupportedEncodingException 指定された文字セットがサポートされていない場合
 	 */
 	public CsvWriter(File file) throws FileNotFoundException, UnsupportedEncodingException {
@@ -110,7 +111,8 @@ public class CsvWriter extends BufferedWriter {
 	 * <B>コンストラクター</B><br>
 	 * 文字コードはファイルから解析します。
 	 * @param URL CSVファイルパス
-	 * @throws IOException 入出力エラーが発生した場合。
+	 * @throws FileNotFoundException ファイルが存在しないか、通常ファイルではなくディレクトリであるか、
+	 * またはなんらかの理由で開くことができない場合。
 	 * @throws UnsupportedEncodingException 指定された文字セットがサポートされていない場合
 	 */
 	public CsvWriter(String URL) throws FileNotFoundException, UnsupportedEncodingException {
@@ -167,7 +169,7 @@ public class CsvWriter extends BufferedWriter {
 	/**
 	 * <h1>add</h1>
 	 * 行データリスト形で一番下に追加します<br>
-	 * @param csvDataList
+	 * @param csvDataList 追加する行データ
 	 */
 	public void add(List<String[]> csvDataList) {
 		csvDataList.forEach(datalint -> add(datalint));

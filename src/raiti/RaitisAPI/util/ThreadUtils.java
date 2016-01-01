@@ -74,7 +74,7 @@ public class ThreadUtils {
 	 * 呼び出し位置を文字列化して取得します。<br>
 	 * 
 	 * Class(Line):Method
-	 * @param N
+	 * @param N 呼び出し元のインデックス
 	 * @return Class(Line):Method 文字列
 	 */
 	public static String getCallPoint(int N) {

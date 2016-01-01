@@ -14,7 +14,7 @@ import raiti.RaitisAPI.io.html.Tag;
  * <h1>HTMLParser</h1>
  * HTMLのタグを簡易的に解析します。<br>
  * 構造化解析はできません。<br>
- * タグとタグの間を解析するので&lt;/>もタグとして解析してしまいます。
+ * タグとタグの間を解析するので&lt;/&gt;もタグとして解析してしまいます。
  * @author Raiti
  * @version 1.0.0
  *

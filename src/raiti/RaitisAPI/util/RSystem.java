@@ -45,7 +45,7 @@ public final class RSystem {
 	 * <h1>getDateTime</h1>
 	 * 現在の日付を標準ファーマットで取得します。<br>
 	 * 標準フォーマット"[yyyy-MM-dd HH:mm:ss]"<br>
-	 * ex->2015-12-2 15:54:33
+	 * ex-&gt;2015-12-2 15:54:33
 	 * @return 日付文字列。
 	 */
 	public static String getDateTime() {

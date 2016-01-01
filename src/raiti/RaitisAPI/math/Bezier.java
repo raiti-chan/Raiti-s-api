@@ -24,7 +24,7 @@ public class Bezier {
 	 * @param p0 始点
 	 * @param p1 ポイント1
 	 * @param p2 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier2D(int p0, int p1, int p2, float t) {
@@ -38,7 +38,7 @@ public class Bezier {
 	 * @param p0 始点
 	 * @param p1 ポイント1
 	 * @param p2 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier2D(float p0, float p1, float p2, float t) {
@@ -52,7 +52,7 @@ public class Bezier {
 	 * @param p0 始点
 	 * @param p1 ポイント1
 	 * @param p2 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier2DAll(int p0, int p1, int p2, float t) {
@@ -66,7 +66,7 @@ public class Bezier {
 	 * @param p0 始点
 	 * @param p1 ポイント1
 	 * @param p2 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier2DAll(float p0, float p1, float p2, float t) {
@@ -81,7 +81,7 @@ public class Bezier {
 	 * @param p1 ポイント1
 	 * @param p2 ポイント2
 	 * @param p3 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier3D(int p0, int p1, int p2, int p3, float t) {
@@ -97,7 +97,7 @@ public class Bezier {
 	 * @param p1 ポイント1
 	 * @param p2 ポイント2
 	 * @param p3 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezier3D(float p0, float p1, float p2, float p3, float t) {
@@ -112,7 +112,7 @@ public class Bezier {
 	 * @param start 始点
 	 * @param p 各ポイント
 	 * @param end 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezierCurve(int start, int end, float t, int... p) {
@@ -153,7 +153,7 @@ public class Bezier {
 	 * @param start 始点
 	 * @param p 各ポイント
 	 * @param end 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezierCurve(float start, float end, float t, float... p) {
@@ -191,10 +191,8 @@ public class Bezier {
 	 * <h1>bezierCurve</h1>
 	 * 多次元ベジエ関数<br>
 	 * p[0]から出て、各ポイントに引っ張られp配列の最後の値で終わる曲線
-	 * @param start 始点
 	 * @param p 各ポイント
-	 * @param end 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezierCurve(float t, int... p) {
@@ -228,10 +226,8 @@ public class Bezier {
 	 * <h1>bezierCurve</h1>
 	 * 多次元ベジエ関数<br>
 	 * p[0]から出て、各ポイントに引っ張られp配列の最後の値で終わる曲線
-	 * @param start 始点
 	 * @param p 各ポイント
-	 * @param end 終点
-	 * @param t 0 =< t =< 1 の線の描写値
+	 * @param t 0 =&lt; t =&lt; 1 の線の描写値
 	 * @return ベジエ値
 	 */
 	public static float bezierCurve(float t, float... p) {

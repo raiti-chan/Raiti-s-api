@@ -3,8 +3,8 @@ package raiti.RaitisAPI.io.html;
 /**
  * <h1>Tag</h1>
  * タグの簡易オブジェクト<br>
- * タグの構成は "&lt;tag Property1 = "No.1" Property2 = "No.2">Text&lt;/tag>"<br>
- * タグ本体"&lt;tag Property1 = "No.1" Property2 = "No.2">"<br>
+ * タグの構成は "&lt;tag Property1 = "No.1" Property2 = "No.2"&gt;Text&lt;/tag&gt;"<br>
+ * タグ本体"&lt;tag Property1 = "No.1" Property2 = "No.2"&gt;"<br>
  * タグの名前 tag<br>
  * プロパティー文字列 Property1 = "No.1" Property2 = "No.2" <br>
  * タグ内テキスト Text<br>

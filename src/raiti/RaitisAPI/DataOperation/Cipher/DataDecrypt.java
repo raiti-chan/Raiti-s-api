@@ -171,8 +171,11 @@ public class DataDecrypt {
 	 * データを複合化します。<br>
 	 * {@link DataDecrypt#SetUP()}を実行してから実行してください。
 	 * @return 複合化されたデータ
-	 * @throws IllegalBlockSizeException この暗号がブロック暗号であり、パディングが要求されておらず(暗号化モードの場合のみ)、この暗号で処理されたデータの入力長の合計がブロック・サイズの倍数でない場合。または、この暗号化アルゴリズムが、指定された入力データを処理できない場合。
-	 * @throws BadPaddingException
+	 * @throws IllegalBlockSizeException この暗号がブロック暗号であり、パディングが要求されておらず(暗号化モードの場合のみ)、
+	 * この暗号で処理されたデータの入力長の合計がブロック・サイズの倍数でない場合。
+	 * または、この暗号化アルゴリズムが、指定された入力データを処理できない場合。
+	 * @throws BadPaddingException この暗号が復号化モードであり、パディング(またはパディング解除)が要求されたが、
+	 * 復号化されたデータが適切なパディング・バイトでバインドされない場合。
 	 */
 	public byte[] Decrypt() throws IllegalBlockSizeException, BadPaddingException {
 		byte[] cipherData = this.cipher.doFinal(this.datas);
