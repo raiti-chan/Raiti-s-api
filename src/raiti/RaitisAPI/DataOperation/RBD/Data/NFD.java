@@ -105,6 +105,13 @@ public interface NFD<T> {
 	 */
 	public void DatasizeUpData();
 	
+	/**
+	 * <h1>StringOutput</h1>
+	 * データを文字列として標準出力します。<br>
+	 * @param Header 出力より前に入る文字列
+	 */
+	public void StringOutput(String Header);
+	
 	//==================================================================================================================
 	
 	/**

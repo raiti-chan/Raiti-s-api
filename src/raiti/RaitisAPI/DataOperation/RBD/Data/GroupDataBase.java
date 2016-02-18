@@ -6,6 +6,7 @@ package raiti.RaitisAPI.DataOperation.RBD.Data;
 import java.util.HashMap;
 
 import raiti.RaitisAPI.DataOperation.RBD.ArrayObjectOperation;
+import raiti.RaitisAPI.arrays.ArraysUtility;
 import raiti.RaitisAPI.util.ByteUtility;
 
 /** <h1>GroupData</h1>
@@ -16,12 +17,17 @@ import raiti.RaitisAPI.util.ByteUtility;
  * @version 1.0.0
  * 
  */
-public abstract class GroupDataBase<T extends GroupDataBase<?>> extends ArrayObjectOperation implements NFD<T>{
+public abstract class GroupDataBase<T> extends ArrayObjectOperation implements NFD<T>{
+	
+	/**
+	 * このデータのバイトサイズ
+	 */
+	private int size = 0;
 	
 	/**
 	 * データ名
 	 */
-	private String name;
+	protected String name;
 	
 	//-------------------------------------コンストラクター
 	
@@ -40,30 +46,38 @@ public abstract class GroupDataBase<T extends GroupDataBase<?>> extends ArrayObj
 	 * @param datas 設定するデータ配列 
 	 * @param name データ名
 	 */
-	public GroupDataBase(HashMap<String, NFD<?>> datas,String name) {
+	public GroupDataBase(String name,HashMap<String, NFD<?>> datas) {
 		this.map = datas;
 		this.name = name;
 	}
-
-	/**<h1>setData</h1>
-	 * オーバーライド
-	 * @return セットしたデータがそのまま返ります。
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#setData(java.lang.Object)
-	 */
-	@Override
-	public T setData(T data) {
-		this.map = data.getmap();
-		return data;
-	}
-
+	
 	/**<h1>toByte</h1>
 	 * オーバーライド
 	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#toByte()
 	 */
 	@Override
 	public byte[] toByte() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		byte[] name = NameToByte();
+		byte[] format = ByteUtility.IntToByte(getFormat());
+		byte[] data = ByteUtility.IntToByte(size);
+		byte[] datas = DataToByte();
+		
+		this.size = name.length + DELIMITEDMARKSIZE + format.length + data.length + datas.length + FINISHMARKSIZE;
+		
+		byte[] retDatas = ArraysUtility.addAll(name, DELIMITEDMARK, format,data,datas,FINISHMARK);
+		
+		return retDatas;
+	}
+	
+	/**<h1>DatasizeUpData</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#DatasizeUpData()
+	 */
+	@Override
+	public void DatasizeUpData() {
+		int size = NameToByte().length;
+		size += DELIMITEDMARKSIZE + 4 + 4 + bytesize() + FINISHMARKSIZE;
+		this.size = size;
 	}
 
 	/**<h1>isGroup</h1>

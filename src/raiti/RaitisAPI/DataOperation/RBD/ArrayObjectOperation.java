@@ -3,10 +3,12 @@
  */
 package raiti.RaitisAPI.DataOperation.RBD;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import raiti.RaitisAPI.DataOperation.RBD.Data.IntData;
 import raiti.RaitisAPI.DataOperation.RBD.Data.NFD;
 
 /** <h1>ArrayObjectOperation</h1>
@@ -24,6 +26,16 @@ public abstract class ArrayObjectOperation {
 	 */
 	protected HashMap<String, NFD<?>> map;
 	
+	/**
+	 * データのサイズ
+	 */
+	protected int bytesize = 0;
+	
+	/**
+	 * このデータが変更されているか
+	 */
+	protected boolean changedData = false;
+	
 	//------------------------------------------------------add
 	/**
 	 * <h1>add</h1>
@@ -38,7 +50,9 @@ public abstract class ArrayObjectOperation {
 	 * keyのマッピングが存在しなかった場合はnull。戻り値nullは、マップが以前にnullとkeyを関連付けていたことを示す場合もある。
 	 */
 	public NFD<?> add(String key,NFD<?> data){
-		return map.put(key, data);
+		NFD<?> retData = map.put(key, data);
+		changedData = true;
+		return retData;
 	}
 	
 	/**
@@ -50,7 +64,9 @@ public abstract class ArrayObjectOperation {
 	 * 同じ名前が存在しなかった場合はnull
 	 */
 	public NFD<?> add(NFD<?> data){
-		return map.put(data.getName(),data);
+		NFD<?> retData = map.put(data.getName(), data);
+		changedData = true;
+		return retData;
 	}
 	
 	/**
@@ -67,6 +83,7 @@ public abstract class ArrayObjectOperation {
 			buffer[loop] = this.map.put(data.getName(), data);
 			loop++;
 		}
+		changedData = true;
 		return buffer;
 	}
 	
@@ -79,6 +96,7 @@ public abstract class ArrayObjectOperation {
 	 */
 	public NFD<?>[] addAll(List<NFD<?>> datas) {
 		NFD<?>[] buffer = new NFD<?>[1];
+		changedData = true;
 		return addAll(datas.toArray(buffer));
 	}
 	
@@ -98,6 +116,7 @@ public abstract class ArrayObjectOperation {
 			buffer[i] = add(name,datamap.get(name));
 			i++;
 		}
+		changedData = true;
 		return buffer;
 	}
 	
@@ -165,8 +184,24 @@ public abstract class ArrayObjectOperation {
 	 * @return 指定したデータ名のオブジェクト
 	 */
 	@SuppressWarnings("unchecked")
-	public <F extends NFD<?>> F getNFD(String dataname) {
-		return (F) get(dataname);
+	public <F extends NFD<?>> F getNFD(String dataname){
+		F data = (F) get(dataname);
+		return data;
+	}
+	
+	
+	/**
+	 * <h1>getIntNFD</h1>
+	 * NFDデータをInt型データとして取得します。フォーマットが違った場合はnullが返されます。<br>
+	 * @param dataname データ名
+	 * @return IntDataにキャストされたデータ。フォーマットが違った場合null
+	 */
+	public IntData getIntNFD(String dataname) {
+		NFD<?> data = getNFD(dataname);
+		if(data.getFormat() == NFD.INT) {
+			return (IntData) data;
+		}
+		return null;
 	}
 	
 	//------------------------------------------------------remove
@@ -177,7 +212,9 @@ public abstract class ArrayObjectOperation {
 	 * @return 消去したデータ
 	 */
 	public NFD<?> remove(String name) {
-		return this.map.remove(name);
+		NFD<?> retData = this.map.remove(name);
+		changedData = true;
+		return retData;
 	}
 	
 	/**
@@ -193,6 +230,7 @@ public abstract class ArrayObjectOperation {
 			datas[i] = this.map.remove(name);
 			i++;
 		}
+		changedData = true;
 		return datas;
 	}
 	
@@ -211,6 +249,7 @@ public abstract class ArrayObjectOperation {
 		data.setName(newName);
 		remove(oldName);
 		add(data);
+		changedData = true;
 		return oldDataname;
 	}
 	
@@ -235,6 +274,43 @@ public abstract class ArrayObjectOperation {
 		}
 	}
 	
+	/**
+	 * <h1>byteSizeUpdate</h1>
+	 * データのサイズを更新します<br>
+	 */
+	public void byteSizeUpdate() {
+		NFD<?>[] datas = getAll();
+		for(NFD<?>data : datas) {
+			bytesize += data.bytesize();
+		}
+		changedData = false;
+	}
+	
+	/**
+	 * <h1>bytesize</h1>
+	 * このデータのバイトサイズを取得します<br>
+	 * @return このデータのバイトサイズ
+	 */
+	public int bytesize() {
+		if(changedData) {
+			byteSizeUpdate();
+		}
+		return bytesize;
+	}
+	
+	/**
+	 * <h1>toByte</h1>
+	 * データをbyte配列に変換します<br>
+	 * @return byte配列データ
+	 */
+	public byte[] ToByte() {
+		ByteBuffer buffer = ByteBuffer.allocate(bytesize);
+		NFD<?>[] datas = getAll();
+		for(NFD<?> data : datas) {
+			buffer.put(data.toByte());
+		}
+		return buffer.array();
+	}
 
 	
 }

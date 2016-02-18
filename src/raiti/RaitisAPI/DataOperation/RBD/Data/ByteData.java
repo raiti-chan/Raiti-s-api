@@ -3,33 +3,30 @@
  */
 package raiti.RaitisAPI.DataOperation.RBD.Data;
 
-import raiti.RaitisAPI.util.ByteUtility;
 
-/** <h1>IntData</h1>
- * Int型データをサポートします<br>
+/** <h1>ByteData</h1>
+ * Byte型データをサポートします<br>
  * @author Raiti
  * @version 1.0.0
  * 
  */
-public class IntData extends NFDBase<Integer>{
+public class ByteData extends NFDBase<Byte> {
 	
 	/**
 	 * このデータのフォーマット
 	 */
-	public static final int FORMAT = INT;
-	
+	public static final  int FORMAT = BYTE;
 	
 	//-------------------------------------コンストラクター
-
-	/**<B>コンストラクター</B><br>
-	 * Int型データを新しく生成します
+	/**
+	 * <B>コンストラクター</B><br>
+	 * Byte型データを新しく生成します
 	 * @param name データ名
 	 * @param data データ
 	 */
-	public IntData(String name,Integer data) {
-		super(name,data);
+	public ByteData(String name, byte data) {
+		super(name, data);
 	}
-
 
 	/**<h1>getFormat</h1>
 	 * オーバーライド
@@ -39,6 +36,25 @@ public class IntData extends NFDBase<Integer>{
 	public int getFormat() {
 		return FORMAT;
 	}
+
+	/**<h1>DataToByte</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#DataToByte()
+	 */
+	@Override
+	public byte[] DataToByte() {
+		byte[] datas = {data};
+		return datas;
+	}
+
+	/**<h1>getDataSize</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFDBase#getDataSize()
+	 */
+	@Override
+	public int getDataSize() {
+		return 1;
+	}
 	
 	/**<h1>toString</h1>
 	 * オーバーライド
@@ -46,34 +62,8 @@ public class IntData extends NFDBase<Integer>{
 	 */
 	@Override
 	public String toString() {
-		String text = this.getName()+" : 3(Integer) : "+this.data.intValue();
+		String text = this.getName()+" : 1(Byte) : "+data;
 		return text;
 	}
-
-
 	
-	/**<h1>dataToByte</h1>
-	 * オーバーライド
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#DataToByte()
-	 */
-	@Override
-	public byte[] DataToByte() {
-		return ByteUtility.IntToByte(data.intValue());
-	}
-
-
-	
-	/**<h1>getDataSize</h1>
-	 * オーバーライド
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFDBase#getDataSize()
-	 */
-	@Override
-	public int getDataSize() {
-		return ByteUtility.INTSIZE;
-	}
-	
-
-	
-	
-
 }

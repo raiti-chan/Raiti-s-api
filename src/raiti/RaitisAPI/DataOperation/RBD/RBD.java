@@ -27,4 +27,18 @@ public class RBD extends ArrayObjectOperation{
 		this.map = datas;
 	}
 	
+	
+	//==================================================================================================================
+	//------------------------------------------------------
+	/**
+	 * <h1>AllStringOutput</h1>
+	 * データを全て標準出力へ文字列化して出力します。<br>
+	 */
+	public void AllStringOutput() {
+		NFD<?>[] datas = getAll();
+		for(NFD<?> data : datas) {
+			data.StringOutput("");
+		}
+	}
+	
 }

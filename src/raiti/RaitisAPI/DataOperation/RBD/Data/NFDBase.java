@@ -138,6 +138,14 @@ public abstract class NFDBase <T> implements NFD<T>{
 		this.size = size;
 	}
 	
+	/**<h1>StringOutput</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#StringOutput()
+	 */
+	@Override
+	public void StringOutput(String Header) {
+		System.out.println(Header + this.toString());
+	}
 	
 	/**<h1>toByte</h1>
 	 * オーバーライド
