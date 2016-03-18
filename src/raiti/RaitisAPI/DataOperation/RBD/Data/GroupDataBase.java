@@ -37,7 +37,7 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 	 * @param name データ名
 	 */
 	public GroupDataBase(String name) {
-		this.map = new HashMap<String,NFD<?>>();
+		super(new HashMap<String,NFD<?>>());
 		this.name = name;
 	}
 	
@@ -47,7 +47,7 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 	 * @param name データ名
 	 */
 	public GroupDataBase(String name,HashMap<String, NFD<?>> datas) {
-		this.map = datas;
+		super(datas);
 		this.name = name;
 	}
 	
@@ -59,12 +59,12 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 	public byte[] toByte() {
 		byte[] name = NameToByte();
 		byte[] format = ByteUtility.IntToByte(getFormat());
-		byte[] data = ByteUtility.IntToByte(size);
 		byte[] datas = DataToByte();
+		byte[] sizedata = ByteUtility.IntToByte(datas.length);
 		
-		this.size = name.length + DELIMITEDMARKSIZE + format.length + data.length + datas.length + FINISHMARKSIZE;
+		this.size = name.length + DELIMITEDMARKSIZE + format.length + 4 + datas.length;
 		
-		byte[] retDatas = ArraysUtility.addAll(name, DELIMITEDMARK, format,data,datas,FINISHMARK);
+		byte[] retDatas = ArraysUtility.addAll(name, DELIMITEDMARK, format,sizedata,datas);
 		
 		return retDatas;
 	}
@@ -76,7 +76,7 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 	@Override
 	public void DatasizeUpData() {
 		int size = NameToByte().length;
-		size += DELIMITEDMARKSIZE + 4 + 4 + bytesize() + FINISHMARKSIZE;
+		size += DELIMITEDMARKSIZE + 4 + 4 + bytesize();
 		this.size = size;
 	}
 
@@ -99,7 +99,15 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 		return name;
 	}
 	
-
+	/**
+	 * <h1>getDataSize</h1>
+	 * このデータのバイトサイズを取得します<br>
+	 * @return
+	 */
+	public int getDataSize() {
+		return size;
+	}
+	
 	
 	/**<h1>setName</h1>
 	 * オーバーライド

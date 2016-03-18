@@ -11,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 
 import raiti.RaitisAPI.util.RSystem;
 
+
 /** <h1>DualPrintStream</h1>
  * 二つのPrintStreamを併用したPrintStreamを作成するクラスです。<br>
  * 用途は、標準出力をコンソール(デフォルト)と、その他(ファイルや、logエリア)に同時に出力したい場合などに使用します。
@@ -182,7 +183,16 @@ public class DualPrintStream extends PrintStream {
 	public boolean isTimeDumpofSub() {
 		return this.timeDumpofSub;
 	}
-
+	
+	/**
+	 * <h1>isTimeDumpofMain</h1>
+	 * {@link DualPrintStream#timeDumpofMain}の取得<br>
+	 * @return timeDumpofMain
+	 */
+	public boolean isTimeDumpofMain() {
+		return this.timeDumpofMain;
+	}
+	
 	/** <h1>setTimeDumpofSub</h1>
 	 * {@link DualPrintStream#timeDumpofSub}をセットします<br>
 	 * @param timeDumpofSub セットする timeDumpofSub
@@ -190,7 +200,15 @@ public class DualPrintStream extends PrintStream {
 	public void setTimeDumpofSub(boolean timeDumpofSub) {
 		this.timeDumpofSub = timeDumpofSub;
 	}
-
+	
+	/** <h1>setTimeDumpofMain</h1>
+	 * {@link DualPrintStream#timeDumpofMain}をセットします<br>
+	 * @param timeDumpofMain セットする timeDumpofMain
+	 */
+	public void setTimeDumpofMain(boolean timeDumpofMain) {
+		this.timeDumpofMain = timeDumpofMain;
+	}
+	
 	//------------------------------------------------------Override
 	/**<h1>flush</h1>
 	 * オーバーライド
@@ -212,6 +230,7 @@ public class DualPrintStream extends PrintStream {
 		super.close();
 	}
 
+	
 	/**<h1>print</h1>
 	 * オーバーライド
 	 * @see java.io.PrintStream#print(boolean)
@@ -339,7 +358,15 @@ public class DualPrintStream extends PrintStream {
 		this.subStream.print(timeDumpofSub ? nowtime+" "+objString: objString);
 		super.print(timeDumpofMain ? nowtime+" "+objString: objString);
 	}
-
+	
+	
+	
+	/*
+	 * XXX printlnの際、substreamのprintが2度呼び出される！！
+	 * 
+	 * 
+	 */
+	
 	/**<h1>println</h1>
 	 * オーバーライド
 	 * @see java.io.PrintStream#println()

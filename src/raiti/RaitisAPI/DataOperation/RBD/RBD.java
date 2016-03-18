@@ -20,11 +20,11 @@ public class RBD extends ArrayObjectOperation{
 	 * 
 	 */
 	public RBD() {
-		this.map = new HashMap<String,NFD<?>>();
+		super(new HashMap<String,NFD<?>>());
 	}
 	
 	public RBD(HashMap<String, NFD<?>> datas) {
-		this.map = datas;
+		super(datas);
 	}
 	
 	

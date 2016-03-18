@@ -177,18 +177,6 @@ public interface NFD<T> {
 	public static final int DELIMITEDMARKSIZE = DELIMITEDMARK.length;
 	
 	/**
-	 * NFDデータの終端部分のしるし<br>
-	 * Name:Format:Data;
-	 * の;の部分
-	 */
-	public static final byte[] FINISHMARK = {0x00,0x3B,-0x7F,-0x09};
-	
-	/**
-	 * データ終端部分のしるしのサイズ
-	 */
-	public static final int FINISHMARKSIZE = FINISHMARK.length;
-	
-	/**
 	 * <h1>NFDByteToString</h1>
 	 * 1つのNFDバイトデータをString形式に変換します<br>
 	 * @param NFDdata String形式に変換するデータ

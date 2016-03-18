@@ -134,7 +134,7 @@ public abstract class NFDBase <T> implements NFD<T>{
 	@Override
 	public void DatasizeUpData() {
 		int size = NameToByte().length;
-		size += DELIMITEDMARKSIZE + 4 + DataToByte().length + FINISHMARKSIZE;
+		size += DELIMITEDMARKSIZE + 4 + 4 + DataToByte().length;
 		this.size = size;
 	}
 	
@@ -156,11 +156,11 @@ public abstract class NFDBase <T> implements NFD<T>{
 		byte[] name = NameToByte();
 		byte[] format = ByteUtility.IntToByte(getFormat());
 		byte[] data = DataToByte();
+		byte[] sizedata = ByteUtility.IntToByte(data.length);
 		
-		this.size = name.length + DELIMITEDMARKSIZE + format.length + data.length + FINISHMARKSIZE;
+		this.size = name.length + DELIMITEDMARKSIZE + format.length + 4 + data.length;
 		
-		byte[] datas = ArraysUtility.addAll(name, DELIMITEDMARK , format  , data , FINISHMARK);
-		
+		byte[] datas = ArraysUtility.addAll(name, DELIMITEDMARK , format , sizedata , data);
 		
 		return datas;
 	}
