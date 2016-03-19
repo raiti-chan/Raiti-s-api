@@ -33,6 +33,7 @@ public abstract class NFDBase <T> implements NFD<T>{
 	/**
 	 * <B>コンストラクター</B><br>
 	 * データを生成します
+	 * @param name データ名
 	 */
 	public NFDBase(String name) {
 		this.name = name;
@@ -41,7 +42,8 @@ public abstract class NFDBase <T> implements NFD<T>{
 	/**
 	 * <B>コンストラクター</B><br>
 	 * 初期データを格納してデータを生成します。
-	 * @param data
+	 * @param name データ名
+	 * @param data 格納データ
 	 */
 	public NFDBase(String name,T data) {
 		this.data = data;
@@ -92,7 +94,6 @@ public abstract class NFDBase <T> implements NFD<T>{
 	
 	/**<h1>setName</h1>
 	 * オーバーライド
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#setName()
 	 */
 	@Override
 	public String setName(String name) {
@@ -140,7 +141,6 @@ public abstract class NFDBase <T> implements NFD<T>{
 	
 	/**<h1>StringOutput</h1>
 	 * オーバーライド
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#StringOutput()
 	 */
 	@Override
 	public void StringOutput(String Header) {
@@ -149,7 +149,6 @@ public abstract class NFDBase <T> implements NFD<T>{
 	
 	/**<h1>toByte</h1>
 	 * オーバーライド
-	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#toByte()
 	 */
 	@Override
 	public byte[] toByte() {

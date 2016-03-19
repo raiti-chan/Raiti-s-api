@@ -1,5 +1,6 @@
-raiti.RaitisAPI.DataOperation
 raiti.RaitisAPI.DataOperation.Cipher
+raiti.RaitisAPI.DataOperation.RBD
+raiti.RaitisAPI.DataOperation.RBD.Data
 raiti.RaitisAPI.annotation
 raiti.RaitisAPI.arrays
 raiti.RaitisAPI.arrays.sort
@@ -7,6 +8,7 @@ raiti.RaitisAPI.io
 raiti.RaitisAPI.io.csv
 raiti.RaitisAPI.io.html
 raiti.RaitisAPI.math
+raiti.RaitisAPI.net
 raiti.RaitisAPI.operation
 raiti.RaitisAPI.util
 raiti.RaitisAPI.util.PrintStream

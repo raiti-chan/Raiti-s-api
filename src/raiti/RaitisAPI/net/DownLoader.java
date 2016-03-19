@@ -72,7 +72,7 @@ public class DownLoader {
 	/**
 	 * <h1>getDataInputStream</h1>
 	 * URLのDataInputStreamを取得します<br>
-	 * @return
+	 * @return ダウンロードするデータの入力ストリーム
 	 * @throws IOException 入力ストリームの作成中に入出力エラーが発生した場合。
 	 */
 	public DataInputStream getDataInputStream() throws IOException {

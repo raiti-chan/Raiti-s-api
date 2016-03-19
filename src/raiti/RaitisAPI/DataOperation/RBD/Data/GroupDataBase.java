@@ -102,7 +102,7 @@ public abstract class GroupDataBase<T> extends ArrayObjectOperation implements N
 	/**
 	 * <h1>getDataSize</h1>
 	 * このデータのバイトサイズを取得します<br>
-	 * @return
+	 * @return このデータのバイトサイズ
 	 */
 	public int getDataSize() {
 		return size;

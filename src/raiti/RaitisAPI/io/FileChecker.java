@@ -40,11 +40,16 @@ public class FileChecker {
 	/**
 	 * <h1>ReverseCheck</h1>
 	 * ファイルを後ろから名前の照合をし、一致したもので一番初めの1つを取得します<br>
+	 * 一致しなかった場合nullが返されます<br>
 	 * @param text 照合する文字列
-	 * @return 後ろから照合し、取得した最初のファイルパス
+	 * @return 後ろから照合し、取得した最初のファイルパス。一致しなかった場合null
 	 */
 	public String ReverseCheck(String text) {
 		String[] returnURLS = ReverseCheckAll(text);
+		if(returnURLS.length == 0) {
+			returnURLS = null;
+			return null;
+		}
 		String returnURL = returnURLS[0];
 		returnURLS = null;
 		return returnURL;
@@ -59,9 +64,10 @@ public class FileChecker {
 	 * ・File3.png<br>
 	 * ・File4.txt<br>
 	 * とファイルがあり、このメソッドを".txt"指定で実行すると<br>
-	 * File1.txt,File2.txt,file4.txt が返されます
+	 * File1.txt,File2.txt,file4.txt が返されます<br>
+	 * ファイルが1つも一致しなかった場合nullが返されます
 	 * @param text 照合する文字列
-	 * @return 照合し一致したファイルパス
+	 * @return 照合し一致したファイルパス。1つも一致しなかった場合null
 	 */
 	public String[] ReverseCheckAll(String text) {
 		char[] textchar = text.toCharArray();
@@ -78,7 +84,9 @@ public class FileChecker {
 				}
 			}
 		}
-		
+		if(returnURLList.size() == 0) {
+			return null;
+		}
 		String[] UrlList = new String[returnURLList.size()];
 		for (int i = 0, l = UrlList.length; i < l; i++) {
 			UrlList[i] = returnURLList.get(i);

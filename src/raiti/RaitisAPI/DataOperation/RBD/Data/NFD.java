@@ -67,6 +67,7 @@ public interface NFD<T> {
 	 * このオブジェクトデータの固有名を設定します<br>
 	 * このメソッドを利用してグループに保管されたオブジェクト名を変更した場合グループ登録名と一致しなくなります。
 	 * 一致させた状態でリネームする場合は{@link ArrayObjectOperation}
+	 * @param name 変更する名前
 	 * @return 前に付けられていた名前
 	 */
 	public String setName(String name);

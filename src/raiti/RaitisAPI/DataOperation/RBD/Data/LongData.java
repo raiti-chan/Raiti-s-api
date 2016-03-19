@@ -22,8 +22,8 @@ public class LongData extends NFDBase<Long> {
 	/**
 	 * <B>コンストラクター</B><br>
 	 * Long型データを新しく生成します
-	 * @param name
-	 * @param data
+	 * @param name データ名
+	 * @param data 格納するデータ
 	 */
 	public LongData(String name , long data) {
 		super(name,data);

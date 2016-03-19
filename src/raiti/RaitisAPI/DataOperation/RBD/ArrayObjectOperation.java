@@ -167,7 +167,7 @@ public abstract class ArrayObjectOperation {
 	 * @param index 追加するインデックス
 	 * @param key 追加するキー
 	 * @return 追加された場合true、されなかった場合false
-	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index &lt; 0||index &gt;= size())
 	 */
 	protected boolean addKey(int index , String key) {
 		if(hasKey(key)) return false;
@@ -237,6 +237,7 @@ public abstract class ArrayObjectOperation {
 	 * <h1>getNFD</h1>
 	 * NFDを指定したオブジェクトで取得します。<br>
 	 * @param dataname データ名
+	 * @param <F> 取得するデータ形式のクラス
 	 * @return 指定したデータ名のオブジェクト
 	 */
 	@SuppressWarnings("unchecked")
@@ -298,7 +299,7 @@ public abstract class ArrayObjectOperation {
 	 * 指定したインデックスのキーを取得します<br>
 	 * @param index 取得するキーのインデックス
 	 * @return 取得したキー
-	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index &lt; 0||index &gt;= size())
 	 */
 	public String getKey(int index) {
 		return keyList.get(index);
@@ -353,7 +354,7 @@ public abstract class ArrayObjectOperation {
 	 * キーリスト内から指定したインデックスの要素を消去します<br>
 	 * @param index 消去する要素のインデックス
 	 * @return 消去した要素
-	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index &lt; 0||index &gt;= size())
 	 */
 	protected String Keyremove(int index) {
 		return keyList.remove(index);
@@ -375,8 +376,8 @@ public abstract class ArrayObjectOperation {
 	 * <h1>rename</h1>
 	 * オブジェクト名及びオブジェクトマップ名を変更します<br>
 	 * オブジェクト名と
-	 * @param oldName
-	 * @param newName
+	 * @param oldName 変更するデータ名
+	 * @param newName 変更させる名前
 	 * @return 前の名前
 	 */
 	public String rename(String oldName,String newName) {
@@ -473,9 +474,9 @@ public abstract class ArrayObjectOperation {
 	 * index &lt; to の場合 左に <br>
 	 * index &gt; to の場合 右にシフトされます
 	 * 
-	 * @param index
-	 * @param go
-	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @param index 移動させるキーインデックス
+	 * @param to 移動先
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index &lt; 0||index &gt;= size())
 	 */
 	public void IndexMove(int index,int to) {
 		String key = Keyremove(index);
@@ -489,7 +490,7 @@ public abstract class ArrayObjectOperation {
 	 * @param key 移動させるキー
 	 * @param to 移動先
 	 * @return 移動が成功した場合true、キーが存在しない、及び、何らかのエラーで移動に失敗した場合false
-	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index &lt; 0||index &gt;= size())
 	 */
 	public boolean IndexMove(String key,int to) {
 		if(!hasKey(key)) return false;
