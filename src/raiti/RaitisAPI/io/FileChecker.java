@@ -46,8 +46,7 @@ public class FileChecker {
 	 */
 	public String ReverseCheck(String text) {
 		String[] returnURLS = ReverseCheckAll(text);
-		if(returnURLS.length == 0) {
-			returnURLS = null;
+		if(returnURLS == null) {
 			return null;
 		}
 		String returnURL = returnURLS[0];
