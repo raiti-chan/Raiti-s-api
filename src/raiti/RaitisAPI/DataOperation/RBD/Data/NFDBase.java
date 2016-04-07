@@ -63,12 +63,25 @@ public abstract class NFDBase <T> implements NFD<T>{
 	/**<h1>setData</h1>
 	 * オーバーライド
 	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#setData(java.lang.Object)
+	 * @throws ClassCastException 格納データとNFDデータのフォーマットが一致していない場合にスローされます
 	 */
 	@Override
 	public T setData(T data) {
 		T Provisional = this.data; 
 		this.data = data;
 		DatasizeUpData();
+		return Provisional;
+	}
+	
+	/**<h1>setDataO</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#setDataO(java.lang.Object)
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object setDataO(Object data) {
+		Object Provisional = this.data;
+		this.data = (T) data;
 		return Provisional;
 	}
 	

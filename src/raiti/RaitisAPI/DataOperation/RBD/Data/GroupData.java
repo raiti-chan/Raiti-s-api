@@ -107,5 +107,17 @@ public class GroupData extends GroupDataBase<HashMap<String, NFD<?>>> {
 		return olddata;
 	}
 	
+	/**<h1>setDataO</h1>
+	 * オーバーライド
+	 * @see raiti.RaitisAPI.DataOperation.RBD.Data.NFD#setDataO(java.lang.Object)
+	 * @throws ClassCastException 格納データがHashMap&lt;String,NFD&lt;?&gt;&gt;にキャストできない場合にスローされます
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public Object setDataO(Object data) {
+		HashMap<String, NFD<?>> olddata = map;
+		map = (HashMap<String, NFD<?>>) data;
+		return olddata;
+	}
 	
 }

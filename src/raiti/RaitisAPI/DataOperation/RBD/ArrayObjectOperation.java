@@ -16,6 +16,7 @@ import raiti.RaitisAPI.arrays.ArraysUtility;
  * Objectデータの配列を操作するためのベースクラスです<br>
  * オブジェクト名とマップ名が一致していない場合は一部メソッドがエラーを出す可能性があります。
  * オブジェクト名とマップ名の不一致は非推奨です。
+ * このデータもシュールはキーにインデックスが存在します
  * @author Raiti
  * @version 1.0.0
  * 
@@ -43,6 +44,11 @@ public abstract class ArrayObjectOperation {
 	protected boolean changedData = false;
 	
 	//------------------------------------------------------コンストラクター
+	/**
+	 * <B>コンストラクター</B>
+	 * 新しいデータモジュールを作成します。<br>
+	 * @param datas 初期値のマップデータ
+	 */
 	public ArrayObjectOperation(HashMap<String, NFD<?>> datas) {
 		this.keyList = new ArrayList<String>();
 		this.map = datas;
@@ -57,7 +63,7 @@ public abstract class ArrayObjectOperation {
 	//------------------------------------------------------add
 	/**
 	 * <h1>add</h1>
-	 * 指定された値と指定されたキーをこの配列に追加します。
+	 * 指定された値と指定されたキーをこのデータマップに追加します。
 	 * 以前にこのキーのデータを保持していた場合、古い値が置き換えられます。<br>
 	 * このメソッドでデータを追加した場合、オブジェクトデータの固有名と、
 	 * キーの名前が一致されない場合があるので非推奨です。
@@ -78,8 +84,33 @@ public abstract class ArrayObjectOperation {
 	
 	/**
 	 * <h1>add</h1>
-	 * 指定されたデータ({@link NFD})とそのデータの固有名をキーとしてこの配列に追加します。
+	 * 指定された値と指定されたキーを指定したインデックスでこのデータマップに追加します。
+	 * 以前にこのキーのデータを保持していた場合、古い値が置き換えられます。<br>
+	 * このメソッドでデータを追加した場合、オブジェクトデータの固有名と、
+	 * キーの名前が一致されない場合があるので非推奨です。
+	 * オブジェクト名とマップ名が一致していない場合は一部メソッドがエラーを出す可能性があります。
+	 * @param index データインデックス
+	 * @param key データキー
+	 * @param data 追加するデータ
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @return keyに以前に追加されていたデータ。
+	 * keyのマッピングが存在しなかった場合はnull。戻り値nullは、マップが以前にnullとkeyを関連付けていたことを示す場合もある。
+	 */
+	protected NFD<?> add(int index,String key,NFD<?> data) {
+		if(!addKey(index,key)) {
+			IndexMove(key, index);
+		}
+		NFD<?> retData = map.put(key, data);
+		changedData = true;
+		return retData;
+	}
+	
+	/**
+	 * <h1>add</h1>
+	 * 指定されたデータ({@link NFD})とそのデータの固有名をキーとしてこのデータマップに追加します。
 	 * 以前に同じ名前のデータが格納されていた場合、古いデータが置き換えられます。<br>
+	 * 置き換えた場合、データインデックスは最後になります。
+	 * データインデックスを変えない場合は{@link #changeData(int, Object)}を使用してください
 	 * @param data 追加するデータ
 	 * @return 以前に同じ名前で追加されていたデータ。
 	 * 同じ名前が存在しなかった場合はnull
@@ -94,9 +125,29 @@ public abstract class ArrayObjectOperation {
 	}
 	
 	/**
+	 * <h1>add</h1>
+	 * 指定されたデータ({@link NFD})とそのデータの固有名をキーとしてこのデータマップに追加します。
+	 * 以前に同じ名前のデータが格納されていた場合、古いデータが置き換えられます。<br>
+	 * @param index データインデックス
+	 * @param data 追加するデータ 
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @return 以前に同じ名前で追加されていたデータ。
+	 * 同じ名前が存在しなかった場合はnull
+	 */
+	public NFD<?> add(int index,NFD<?> data){
+		if(!addKey(index,data.getName())) {
+			IndexMove(data.getName(), index);
+		}
+		NFD<?> retData = map.put(data.getName(), data);
+		changedData = true;
+		return retData;
+	}
+	
+	/**
 	 * <h1>addAll</h1>
 	 * 指定されたデータ({@link NFD})配列とそのデータの固有名をキーとしてこの配列に追加します。
 	 * 以前に同じ名前のデータが格納されていた場合、古いデータが置き換えられます。<br>
+	 * 置き換えた場合、データインデックスは最後になります。
 	 * @param datas 追加するデータ配列
 	 * @return 以前に同じ名前で追加されていたデータ配列。
 	 */
@@ -112,6 +163,10 @@ public abstract class ArrayObjectOperation {
 		}
 		changedData = true;
 		return buffer;
+	}
+	
+	public NFD<?>[] addAll(int index,NFD<?> ... datas){
+		return null;
 	}
 	
 	/**
@@ -188,6 +243,17 @@ public abstract class ArrayObjectOperation {
 	}
 	
 	/**
+	 * <h1>get</h1>
+	 * 指定したインデックスのデータを取得します。<br>
+	 * @param index 取得するデータのインデックス
+	 * @return 指定したインデックスのデータ
+	 * @throws IndexOutOfBoundsException - インデックスが範囲外の場合(index < 0||index>= size())
+	 */
+	public NFD<?> get(int index){
+		return map.get(keyList.get(index));
+	}
+	
+	/**
 	 * <h1>getAll</h1>
 	 * 指定した名前のデータを複数取得します。指定した名前のデータが存在しない場合はnullが返ります。<br>
 	 * @param datanames 取得するデータ名
@@ -219,7 +285,7 @@ public abstract class ArrayObjectOperation {
 	 */
 	public NFD<?>[] getAll(){
 		String[] names = new String[1];
-		names = this.map.keySet().toArray(names);
+		names = this.keyList.toArray(names);
 		return getAll(names);
 		
 	}
@@ -328,6 +394,7 @@ public abstract class ArrayObjectOperation {
 	 */
 	public NFD<?> remove(String name) {
 		NFD<?> retData = this.map.remove(name);
+		Keyremove(name);
 		changedData = true;
 		return retData;
 	}
@@ -343,6 +410,7 @@ public abstract class ArrayObjectOperation {
 		int i = 0;
 		for(String name:names) {
 			datas[i] = this.map.remove(name);
+			Keyremove(name);
 			i++;
 		}
 		changedData = true;
@@ -375,20 +443,72 @@ public abstract class ArrayObjectOperation {
 	/**
 	 * <h1>rename</h1>
 	 * オブジェクト名及びオブジェクトマップ名を変更します<br>
-	 * オブジェクト名と
+	 * 変更先の名前がすでに登録されている場合nullを返して、名前変更を行いません。
+	 * @param index 変更するデータインデックス
+	 * @param newName 変更する名前
+	 * @return 変更前の名前が返されます。変更先の名前がすでに登録されていた場合nullを返します
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 */
+	public String rename(int index,String newName) {
+		NFD<?> data = get(index);
+		if(map.containsKey(newName)) return null;
+		String oldName = data.setName(newName);
+		return oldName;
+	}
+	
+	/**
+	 * <h1>rename</h1>
+	 * オブジェクト名及びオブジェクトマップ名を変更します<br>
+	 * 変更するデータキーが登録されていない場合nullを返します。
+	 * 変更先の名前がすでに登録されている場合nullを返して、名前変更を行いません。
 	 * @param oldName 変更するデータ名
 	 * @param newName 変更させる名前
-	 * @return 前の名前
+	 * @return 変更前の名前が返されます。変更先の名前がすでに登録されていた場合nullを返します
 	 */
 	public String rename(String oldName,String newName) {
-		NFD<?> data = get(oldName);
-		String oldDataname = data.getName();
-		data.setName(newName);
-		remove(oldName);
-		add(data);
-		changedData = true;
-		return oldDataname;
+		int index  = keyList.indexOf(oldName);
+		if(index == -1) return null;
+		return rename(index, newName);
 	}
+	
+	
+	//------------------------------------------------------change
+	/**
+	 * <h1>changeData</h1>
+	 * 指定したインデックスのデータを書き換えます<br>
+	 * 
+	 * @param index データインデックス
+	 * @param newdata 書き換えるデータ
+	 * @param <T> 書き換えるデータ形式のクラス
+	 * @return 書き換える前のデータ
+	 * @throws IndexOutOfBoundsException インデックスが範囲外の場合(index < 0||index>= size())
+	 * @throws ClassCastException 変更するデータ型がすでにあるエントリーのフォーマットと一致しない場合にスローされます
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> T changeData(int index,T newdata) {
+		NFD<?> data = get(index);
+		Object oldData = data.setDataO(newdata);
+		return (T) oldData;
+	}
+	
+	/**
+	 * <h1>changeData</h1>
+	 * 指定したキーのデータを書き換えます<br>
+	 * 指定した名前のデータが存在しない場合nullが返ります
+	 * @param key データキー
+	 * @param newdata 書き換えるデータ
+	 * @param <T> 書き換えるデータ形式のクラス
+	 * @return 書き換える前のデータ。データが存在しなかった場合null
+	 * @throws ClassCastException 変更するデータ型がすでにあるエントリーのフォーマットと一致しない場合にスローされます
+	 */
+	public <T> T changeData(String key,T newdata) {
+		int index = this.getKeyIndex(key);
+		if(index == -1) {
+			return null;
+		}
+		return changeData(index, newdata);
+	}
+	
 	
 	
 	//------------------------------------------------------その他

@@ -33,6 +33,15 @@ public interface NFD<T> {
 	public T setData(T data);
 	
 	/**
+	 * <h1>setDataO</h1>
+	 * データをオブジェクトとして格納します。<br>
+	 * 既にデータがセットされていた場合は新しいデータに置き換わります。
+	 * @param data 格納するデータ
+	 * @return データが置き換わった場合前に格納されていたデータが返されます。新しく格納した場合はnullが返ります。
+	 */
+	public Object setDataO(Object data);
+	
+	/**
 	 * <h1>toString</h1>
 	 * データを文字表記で現します。<br>
 	 * データ名 : フォーマット : データ

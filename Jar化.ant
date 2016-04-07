@@ -4,8 +4,8 @@
     <!--ANT 1.7 is required                                        -->
     <!--define folder properties-->
     <property name="dir.buildfile" value="."/>
-    <property name="dir.workspace" value="E:/Program/Java/Project"/>
-    <property name="dir.jarfile" value="E:\Program\Java\ライブラリー"/>
+    <property name="dir.workspace" value="${dir.buildfile}/.."/>
+    <property name="dir.jarfile" value="D:\Raiti\Documents\Java\ライブラリー"/>
     <target name="create_run_jar">
         <jar destfile="${dir.jarfile}/Raiti'sAPI Master.jar" filesetmanifest="mergewithoutmain" update="true">
             <manifest>
@@ -15,7 +15,7 @@
             <fileset dir="${dir.workspace}/Raiti'S API/bin"/>
         	<fileset dir="${dir.workspace}/Raiti'S API/src"/>
         	<fileset file=""/>
-            <zipfileset excludes="META-INF/*.SF" src="E:/Program/Java/ライブラリー/juniversalchardet-1.0.3.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="D:\Raiti\Documents\Java\ライブラリー\juniversalchardet-1.0.3.jar"/>
         </jar>
     </target>
 </project>
