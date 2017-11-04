@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Raiti'S API.iml" filepath="$PROJECT_DIR$/Raiti'S API.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Raitis-Api.iml" filepath="$PROJECT_DIR$/.idea/modules/Raitis-Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Raitis-Api_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Raitis-Api_main.iml" group="Raitis-Api" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Raitis-Api_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Raitis-Api_test.iml" group="Raitis-Api" />
     </modules>
   </component>
 </project>
